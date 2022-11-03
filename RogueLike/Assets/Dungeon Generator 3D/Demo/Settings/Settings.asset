@@ -13,20 +13,20 @@ MonoBehaviour:
   m_Name: Settings
   m_EditorClassIdentifier: 
   generation:
-    minRooms: 5
-    maxRooms: 5
-    amountOfAdjacentRoomsToConnect: 3
-    minRoomWidth: 8
-    maxRoomWidth: 12
-    minRoomHeight: 8
-    maxRoomHeight: 12
-    minBossRoomWidth: 10
-    maxBossRoomWidth: 12
-    minBossRoomHeight: 10
-    maxBossRoomHeight: 12
-    areaWidth: 50
-    areaHeight: 50
-    minDistanceBetweenRooms: 0
+    minRooms: 4
+    maxRooms: 4
+    amountOfAdjacentRoomsToConnect: 2
+    minRoomWidth: 6
+    maxRoomWidth: 20
+    minRoomHeight: 6
+    maxRoomHeight: 20
+    minBossRoomWidth: 6
+    maxBossRoomWidth: 20
+    minBossRoomHeight: 6
+    maxBossRoomHeight: 20
+    areaWidth: 500
+    areaHeight: 500
+    minDistanceBetweenRooms: 1
     walls:
     - gameObject: {fileID: 4725644372996588504, guid: 149a4fa0a96e08148aab0a113d1ccef5, type: 3}
       name: Wall
