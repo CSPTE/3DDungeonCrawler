@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 503, y: 492}
   m_MaxSize: {x: 18097, y: 14042}
   vertical: 0
-  controlID: 97
+  controlID: 29
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 98
+  controlID: 17
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 99
+  controlID: 18
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -317,38 +317,38 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Dungeon Gems/Textures
+    - Assets/Dungeon Generator 3D/Demo/Prefabs/Structure
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Dungeon Gems/Textures
+  - Assets/Dungeon Generator 3D/Demo/Prefabs/Structure
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\User\UnityGames\comp3218gamecoursework1\RogueLike
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 79}
-    m_SelectedIDs: f2570100
-    m_LastClickedID: 88050
-    m_ExpandedIDs: 000000003e8c0000428c000090990000a699000052560100f257010000ca9a3b
+    scrollPos: {x: 0, y: 35}
+    m_SelectedIDs: 82720000
+    m_LastClickedID: 29314
+    m_ExpandedIDs: 00000000ce7000006a7200007c72000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Dungeon Gems
-      m_OriginalName: Dungeon Gems
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 87634
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 5}
+      m_ClientGUIView: {fileID: 0}
     m_SearchString: 
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
@@ -360,7 +360,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003e8c0000408c0000428c0000
+    m_ExpandedIDs: 00000000ce700000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -488,23 +488,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: c429ffff842dffffa231ffff4436ffffec3affff243bffff9240ffffb24cffff8c4dffffee52ffff4659ffffb65effff8e64ffff2e8affff048bffff528bffff4e93ffff7c94ffffbe94ffff7095ffff1e96ffff1e97ffff5c98ffff30fbffff2a2a0100642a0100be2b0100cc2b01006c2c0100ba2c0100e22c0100802e0100ce300100b2330100ce330100c4340100ce340100403601008a360100e8360100243701002e38010032380100fc380100a83901002a3b01006a3b0100783b0100d63c0100da3d0100ee3d0100b63e0100ce3e01007c3f0100be3f010058400100204201004c4301008845010074470100a8470100
+      m_SelectedIDs: f86b0000
+      m_LastClickedID: 27640
+      m_ExpandedIDs: bca4ffffdea4ffff00a5ffff18a5ffff3aa5ffff52a5ffff74a5ffff96a5ffff56a7ffff92a7ffff28a8ffff80a8ffffb6a9ffffcaa9ffff06aaffff60aaffff56abffff74abffff88abffffc4abffffd8abffff0eacffff26acffff7aacffff92acffffb4acffffccacffff52adffff6aadffff3eaeffff56aeffffd0b0ffff4cb1ffff18b2ffff2ab3ffff5eb4ffff2afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: 
-        m_OriginalName: 
+        m_Name: Generator
+        m_OriginalName: Generator
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: 0
+        m_UserData: -1240
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 11
+        m_OriginalEventType: 0
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 4}
       m_SearchString: 
@@ -645,7 +645,7 @@ MonoBehaviour:
       containerId: overlay-container--right
       floating: 0
       collapsed: 0
-      displayed: 0
+      displayed: 1
       snapOffset: {x: 0, y: 0}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
@@ -761,9 +761,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1.4174826, y: 2.3132613, z: -5.197641}
+    m_Target: {x: 0.47580308, y: 78.69418, z: -8.803288}
     speed: 2
-    m_Value: {x: -1.4174826, y: 2.3132613, z: -5.197641}
+    m_Value: {x: 0.47580308, y: 78.69418, z: -8.803288}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -786,10 +786,10 @@ MonoBehaviour:
       m_Fade:
         m_Target: 0
         speed: 2
-        m_Value: 1
+        m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
-      m_Size: {x: 1, y: 1}
+      m_Size: {x: 0, y: 0}
     yGrid:
       m_Fade:
         m_Target: 1
@@ -812,15 +812,15 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
     speed: 2
-    m_Value: {x: 0.7071068, y: 0.0000004681338, z: 0, w: 0.7071068}
+    m_Value: {x: 0.7071068, y: 0.00000009362676, z: 0, w: 0.7071068}
   m_Size:
-    m_Target: 22.704773
+    m_Target: 16.658014
     speed: 2
-    m_Value: 22.704773
+    m_Value: 15.940683
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_CameraSettings:
     m_Speed: 1
     m_SpeedNormalized: 0.5
