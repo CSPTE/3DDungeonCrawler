@@ -21,7 +21,10 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] float stepHeigth = 0.3f;
     [SerializeField] float stepSmooth = 0.1f;
 
-
+    public GameObject dungeon;
+    private GameObject currentFloor;
+    private int currentGemTarget;
+    private int currentGemsCollected;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +32,7 @@ public class PlayerMotor : MonoBehaviour
         controller = GetComponent<CharacterController>();
         rigidBody = GetComponent<Rigidbody>();
         stepRayUpper.transform.position = new Vector3(stepRayUpper.transform.position.x, stepHeigth, stepRayUpper.transform.position.z);
+        UpdateCurrentRoom();
     }
 
     // Update is called once per frame
@@ -72,6 +76,23 @@ public class PlayerMotor : MonoBehaviour
             if(!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.8f)){
                 rigidBody.position -= new Vector3(0f, -stepSmooth, 0f);
                 Debug.Log("Second if statement");
+            }
+        }
+    }
+
+    void UpdateCurrentRoom(){
+        currentFloor = dungeon.transform.GetChild(1).GetChild(0).gameObject;
+        currentGemsCollected = 0;
+        currentGemTarget = currentFloor.GetComponent<RoomScript>().getNumberOfGems();
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Gem")){
+            other.gameObject.SetActive(false);
+            currentGemsCollected++;
+            if(currentGemsCollected == currentGemTarget){
+                currentFloor.GetComponent<RoomScript>().DestroyBlocker();
             }
         }
     }

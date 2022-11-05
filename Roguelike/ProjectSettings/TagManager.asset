@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - OuterCorner
   - Room
+  - Gem
   layers:
   - Default
   - TransparentFX
