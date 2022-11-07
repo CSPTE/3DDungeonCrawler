@@ -25,6 +25,7 @@ public class PlayerMotor : MonoBehaviour
     private GameObject currentFloor;
     private int currentGemTarget;
     private int currentGemsCollected;
+    private int newFloorPlace = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -52,11 +53,6 @@ public class PlayerMotor : MonoBehaviour
         if(isGrounded && playerVelocity.y < 0)
             playerVelocity.y = -2f;
         controller.Move(playerVelocity * Time.deltaTime);
-        
-        
-
-        
-
 
     }
 
@@ -81,9 +77,10 @@ public class PlayerMotor : MonoBehaviour
     }
 
     void UpdateCurrentRoom(){
-        currentFloor = dungeon.transform.GetChild(1).GetChild(0).gameObject;
+        currentFloor = dungeon.transform.GetChild(1).GetChild(newFloorPlace).gameObject;
         currentGemsCollected = 0;
         currentGemTarget = currentFloor.GetComponent<RoomScript>().getNumberOfGems();
+        newFloorPlace = newFloorPlace + 2;
     }
 
     void OnTriggerEnter(Collider other)
@@ -96,7 +93,13 @@ public class PlayerMotor : MonoBehaviour
             }
         }
     }
-    
 
+    void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.CompareTag("LockFloor")){
+            other.gameObject.GetComponent<MeshRenderer>().enabled = true;
+            UpdateCurrentRoom();
+        }
+    }
 
 }

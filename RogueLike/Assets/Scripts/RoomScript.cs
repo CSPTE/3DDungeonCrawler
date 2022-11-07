@@ -8,6 +8,7 @@ public class RoomScript : MonoBehaviour
     public GameObject wall;
     public int FloorID;
     private int gemsCollected;
+    public GameObject entrance;
 
     // Start is called before the first frame update
     void Start()

@@ -9,6 +9,7 @@ TagManager:
   - OuterCorner
   - Room
   - Gem
+  - LockFloor
   layers:
   - Default
   - TransparentFX
