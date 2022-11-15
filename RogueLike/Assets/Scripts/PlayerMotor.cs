@@ -66,10 +66,10 @@ public class PlayerMotor : MonoBehaviour
     void stepClimb(){
         //program goes here but it probably never goes into the if statements need to check why
         RaycastHit hitLower;
-        if(Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(Vector3.forward), out hitLower, 0.5f)){
+        if(Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(Vector3.forward)*3, out hitLower, 0.5f)){
             Debug.Log("Went through the first if statement");
             RaycastHit hitUpper;
-            if(!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.8f)){
+            if(!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward)*3, out hitUpper, 0.8f)){
                 rigidBody.position -= new Vector3(0f, -stepSmooth, 0f);
                 Debug.Log("Second if statement");
             }
