@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class PlayerMotor : MonoBehaviour
 {   
@@ -37,6 +38,14 @@ public class PlayerMotor : MonoBehaviour
     public TextMeshProUGUI GemCount;
     public TextMeshProUGUI HealthCount;
     private int currentHealth = 10;
+
+    private bool tutorial = true;
+    public Canvas tutorial1;
+    public Canvas tutorial2;
+    public Canvas tutorial3;
+    public Canvas tutorial4;
+    private Button turnOffTutorialButton;
+    private Button okButton;
 
     // Start is called before the first frame update
     void Start()
@@ -137,6 +146,19 @@ public class PlayerMotor : MonoBehaviour
 
     void SetHealthCount(int health){
         HealthCount.text = health.ToString();
+    }
+
+    public void turnOffTutorial(){
+        tutorial = false;
+        stopRenderingCanvas(tutorial1);
+    }
+
+    public void continueTutorial(){
+        stopRenderingCanvas(tutorial1);
+    }
+
+    void stopRenderingCanvas(Canvas can){
+        can.GetComponent<Canvas>().gameObject.SetActive(false);
     }
 
 }
