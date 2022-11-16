@@ -27,6 +27,12 @@ public class PlayerMotor : MonoBehaviour
     private int currentGemsCollected;
     private int newFloorPlace = 0;
 
+    public AudioSource collectGemSound;
+    public AudioSource floorDoorUnlockLock;
+    public AudioSource step;
+    public AudioSource jump;
+    public AudioSource background;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +40,7 @@ public class PlayerMotor : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         stepRayUpper.transform.position = new Vector3(stepRayUpper.transform.position.x, stepHeigth, stepRayUpper.transform.position.z);
         UpdateCurrentRoom();
+        background.Play();
     }
 
     // Update is called once per frame
@@ -45,6 +52,7 @@ public class PlayerMotor : MonoBehaviour
 
     //receive input for InputManager.cs and use them to our character controller
     public void ProcessMove(Vector2 input){
+        //step.Play();
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         moveDirection.z = input.y;
@@ -59,6 +67,7 @@ public class PlayerMotor : MonoBehaviour
     public void Jump(){
         if(isGrounded){
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
+            StartCoroutine(PlaySoundAfterDelay(jump, 1f));
         }
     }
 
@@ -66,10 +75,10 @@ public class PlayerMotor : MonoBehaviour
     void stepClimb(){
         //program goes here but it probably never goes into the if statements need to check why
         RaycastHit hitLower;
-        if(Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(Vector3.forward)*3, out hitLower, 0.5f)){
+        if(Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(Vector3.forward), out hitLower, 0.5f)){
             Debug.Log("Went through the first if statement");
             RaycastHit hitUpper;
-            if(!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward)*3, out hitUpper, 0.8f)){
+            if(!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.8f)){
                 rigidBody.position -= new Vector3(0f, -stepSmooth, 0f);
                 Debug.Log("Second if statement");
             }
@@ -87,9 +96,11 @@ public class PlayerMotor : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Gem")){
             other.gameObject.SetActive(false);
+            collectGemSound.Play();
             currentGemsCollected++;
             if(currentGemsCollected == currentGemTarget){
                 currentFloor.GetComponent<RoomScript>().DestroyBlocker();
+                floorDoorUnlockLock.Play();
             }
         }
     }
@@ -98,8 +109,17 @@ public class PlayerMotor : MonoBehaviour
     {
         if(other.gameObject.CompareTag("LockFloor")){
             other.gameObject.GetComponent<MeshRenderer>().enabled = true;
+            floorDoorUnlockLock.Play();
             UpdateCurrentRoom();
         }
+    }
+
+    IEnumerator PlaySoundAfterDelay(AudioSource audioSource, float delay)
+    {
+        if (audioSource == null)
+            yield break;
+        yield return new WaitForSeconds(delay);
+        audioSource.Play();
     }
 
 }

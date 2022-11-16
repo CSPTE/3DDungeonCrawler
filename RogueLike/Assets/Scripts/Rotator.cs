@@ -10,6 +10,8 @@ public class Rotator : MonoBehaviour
     float height = 0.8f;
     Vector3 pos;
 
+    public AudioSource collectGemSound;
+
     void Start()
     {
         pos = transform.position;
