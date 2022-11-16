@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerMotor : MonoBehaviour
 {   
@@ -33,6 +34,10 @@ public class PlayerMotor : MonoBehaviour
     public AudioSource jump;
     public AudioSource background;
 
+    public TextMeshProUGUI GemCount;
+    public TextMeshProUGUI HealthCount;
+    private int currentHealth = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +46,7 @@ public class PlayerMotor : MonoBehaviour
         stepRayUpper.transform.position = new Vector3(stepRayUpper.transform.position.x, stepHeigth, stepRayUpper.transform.position.z);
         UpdateCurrentRoom();
         background.Play();
+        SetHealthCount(currentHealth);
     }
 
     // Update is called once per frame
@@ -90,6 +96,7 @@ public class PlayerMotor : MonoBehaviour
         currentGemsCollected = 0;
         currentGemTarget = currentFloor.GetComponent<RoomScript>().getNumberOfGems();
         newFloorPlace = newFloorPlace + 2;
+        SetCountText(0, currentGemTarget);
     }
 
     void OnTriggerEnter(Collider other)
@@ -98,6 +105,7 @@ public class PlayerMotor : MonoBehaviour
             other.gameObject.SetActive(false);
             collectGemSound.Play();
             currentGemsCollected++;
+            SetCountText(currentGemsCollected, currentGemTarget);
             if(currentGemsCollected == currentGemTarget){
                 currentFloor.GetComponent<RoomScript>().DestroyBlocker();
                 floorDoorUnlockLock.Play();
@@ -120,6 +128,15 @@ public class PlayerMotor : MonoBehaviour
             yield break;
         yield return new WaitForSeconds(delay);
         audioSource.Play();
+    }
+
+    void SetCountText(int current, int total)
+    {
+        GemCount.text = current + "/" + total;
+    }
+
+    void SetHealthCount(int health){
+        HealthCount.text = health.ToString();
     }
 
 }
