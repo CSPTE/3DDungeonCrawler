@@ -46,6 +46,7 @@ public class PlayerMotor : MonoBehaviour
     public Canvas tutorial4;
     private Button turnOffTutorialButton;
     private Button okButton;
+    private int currentTutorial = 1;
 
     // Start is called before the first frame update
     void Start()
@@ -119,6 +120,18 @@ public class PlayerMotor : MonoBehaviour
                 currentFloor.GetComponent<RoomScript>().DestroyBlocker();
                 floorDoorUnlockLock.Play();
             }
+        } 
+
+        if(other.gameObject.CompareTag("TutorialWall")){
+            if(currentTutorial == 2){
+                loadNextTutorial(tutorial2);
+            } else if (currentTutorial == 3){
+                loadNextTutorial(tutorial3);
+            } else if (currentTutorial == 4){
+                loadNextTutorial(tutorial4);
+            } else {
+                loadNextTutorial(tutorial1);
+            }    
         }
     }
 
@@ -148,6 +161,12 @@ public class PlayerMotor : MonoBehaviour
         HealthCount.text = health.ToString();
     }
 
+    void loadNextTutorial(Canvas can){
+        if (tutorial == true){
+            can.GetComponent<Canvas>().gameObject.SetActive(true);
+        }
+    }
+
     public void turnOffTutorial(){
         tutorial = false;
         stopRenderingCanvas(tutorial1);
@@ -155,6 +174,37 @@ public class PlayerMotor : MonoBehaviour
 
     public void continueTutorial(){
         stopRenderingCanvas(tutorial1);
+        currentTutorial++;
+    }
+
+    public void turnOffTutorial2(){
+        tutorial = false;
+        stopRenderingCanvas(tutorial2);
+    }
+
+    public void continueTutorial2(){
+        stopRenderingCanvas(tutorial2);
+        currentTutorial++;
+    }
+
+    public void turnOffTutorial3(){
+        tutorial = false;
+        stopRenderingCanvas(tutorial3);
+    }
+
+    public void continueTutorial3(){
+        stopRenderingCanvas(tutorial3);
+        currentTutorial++;
+    }
+
+    public void turnOffTutorial4(){
+        tutorial = false;
+        stopRenderingCanvas(tutorial4);
+    }
+
+    public void continueTutorial4(){
+        stopRenderingCanvas(tutorial4);
+        currentTutorial++;
     }
 
     void stopRenderingCanvas(Canvas can){
