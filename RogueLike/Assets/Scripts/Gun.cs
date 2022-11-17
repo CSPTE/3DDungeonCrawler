@@ -27,7 +27,7 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && Time.time >= timestamp){
+        if(Input.GetMouseButtonDown(0)){
             Shoot();
             timestamp = Time.time + 0.4f;
         }
