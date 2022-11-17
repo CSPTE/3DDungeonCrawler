@@ -4,7 +4,14 @@ using UnityEngine;
 
 [AddComponentMenu("Nokobot/Modern Guns/Simple Shoot")]
 public class SimpleShoot : MonoBehaviour
-{
+{   
+
+    [Header("Primary settings")]
+    [SerializeField] private  Camera fspCam;
+    [SerializeField] private float range = 100f;
+    [SerializeField] private float impactForce = 30f;
+    [SerializeField] private float damage = 10f;
+
     [Header("Prefab Refrences")]
     public GameObject bulletPrefab;
     public GameObject casingPrefab;
@@ -33,11 +40,14 @@ public class SimpleShoot : MonoBehaviour
     void Update()
     {
         //If you want a different input, change it here
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetMouseButton(0))
         {
             //Calls animation on the gun that has the relevant animation events that will fire
             gunAnimator.SetTrigger("Fire");
+            //Shoot();
         }
+
+        Aim(Input.GetMouseButton(1));
     }
 
 
@@ -60,6 +70,24 @@ public class SimpleShoot : MonoBehaviour
 
         // Create a bullet and add force on it in direction of the barrel
         Instantiate(bulletPrefab, barrelLocation.position, barrelLocation.rotation).GetComponent<Rigidbody>().AddForce(barrelLocation.forward * shotPower);
+        
+        RaycastHit hit;
+
+        if(Physics.Raycast(fspCam.transform.position, fspCam.transform.forward, out hit, range)){
+            Target target = hit.transform.GetComponent<Target>();
+
+            if(target != null){
+                target.TakeDamage(damage);
+            }
+
+            if(hit.rigidbody != null){
+                hit.rigidbody.AddForce(-hit.normal * impactForce);
+            }
+
+            
+
+        }
+
 
     }
 
@@ -80,6 +108,18 @@ public class SimpleShoot : MonoBehaviour
 
         //Destroy casing after X seconds
         Destroy(tempCasing, destroyTimer);
+    }
+
+    void Aim(bool isAiming){
+        var start = transform.localPosition;
+        var aimpos = transform.localPosition;
+
+        if(isAiming){
+            transform.localPosition = new Vector3(0f, start.y, start.z);
+        } else {
+            transform.localPosition = new Vector3(0.1f, start.y, start.z);
+        }
+         
     }
 
 }
