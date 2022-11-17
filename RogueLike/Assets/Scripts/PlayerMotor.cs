@@ -15,22 +15,17 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] public float jumpHeight = 1.5f;
 
     [Header("Player to step over some things:")]
+
     [SerializeField] GameObject stepRayUpper;
     [SerializeField] GameObject stepRayLower;
     [SerializeField] float stepHeigth = 0.3f;
     [SerializeField] float stepSmooth = 0.1f;
 
     public GameObject dungeon;
-    private Animation swordAnimation;
-    private Animator animator;
     private GameObject currentFloor;
     private int currentGemTarget;
     private int currentGemsCollected;
     private int newFloorPlace = 0;
-    private float timestamp;
-    private float attackTime;
-    private float NTime;
-    AnimatorStateInfo animStateInfo;
 
     // Start is called before the first frame update
     void Start()
@@ -39,33 +34,12 @@ public class PlayerMotor : MonoBehaviour
         rigidBody = GetComponent<Rigidbody>();
         stepRayUpper.transform.position = new Vector3(stepRayUpper.transform.position.x, stepHeigth, stepRayUpper.transform.position.z);
         UpdateCurrentRoom();
-        //swordAnimation = gameObject.GetComponent<Animation>();
-        /*animator = GetComponent<Animator>();
-        AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
-        foreach (AnimationClip clip in clips){
-            //Debug.Log("went here " + clip.name);
-            if(clip.name == "RightHand@Attack01"){
-                attackTime = clip.length;
-            }
-        }
-        //animator.enabled = false;*/
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         isGrounded = controller.isGrounded;
-        /*animStateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        NTime = animStateInfo.normalizedTime;
-        if(Input.GetMouseButtonDown(0)){
-            SwingSword();
-        } else {
-            if( NTime > 1.0f){
-                animator.enabled = false;
-                //timestamp = Time.time + 2f;
-            }
-        }*/
-
         stepClimb();
     }
 
@@ -82,29 +56,18 @@ public class PlayerMotor : MonoBehaviour
 
     }
 
-    public void SwingSword(){
-        //animator.SetBool("swingSword", true);
-        //need to add the part to actually calculate if it hit something
-        //Debug.Log("Sword animator should have been called");
-        //animator.Play("RightHand@Attack01");
-        //animator.enabled = true;
-        //animator.Play("Base Layer.Attack01");
-        //swordAnimation.Play();
-    }
-
     public void Jump(){
         if(isGrounded){
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
         }
     }
 
-
-
    
     void stepClimb(){
         //program goes here but it probably never goes into the if statements need to check why
         RaycastHit hitLower;
         if(Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(Vector3.forward), out hitLower, 0.5f)){
+            Debug.Log("Went through the first if statement");
             RaycastHit hitUpper;
             if(!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.8f)){
                 rigidBody.position -= new Vector3(0f, -stepSmooth, 0f);
