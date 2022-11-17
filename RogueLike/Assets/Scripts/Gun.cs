@@ -27,9 +27,9 @@ public class Gun : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0) && Time.time >= timestamp){
+        if(Input.GetMouseButtonDown(0)){
             Shoot();
-            timestamp = Time.time + 1f;
+            timestamp = Time.time + 0.4f;
         }
 
         Aim(Input.GetMouseButton(1));
@@ -39,7 +39,7 @@ public class Gun : MonoBehaviour
     }
 
     void Shoot(){
-        //muzzleFlash.Play();
+        muzzleFlash.Play();
         //anim.Play("Base Layer.Fire", 0, 0.25f);
         RaycastHit hit;
 
