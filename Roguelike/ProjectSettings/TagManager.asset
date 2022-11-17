@@ -11,6 +11,7 @@ TagManager:
   - Gem
   - LockFloor
   - TutorialWall
+  - Enemy
   layers:
   - Default
   - TransparentFX
