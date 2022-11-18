@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1536
     height: 780.8
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Hierarchy
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -74,7 +74,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 105
+  controlID: 70
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -577,22 +577,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/DungeonDragons/Prefab/DragonUsurper
+    - Assets/Fantasy Monster(wizard) Demo
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/DungeonDragons/Prefab/DragonUsurper
+  - Assets/Fantasy Monster(wizard) Demo
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\User\UnityGames\comp3218gamecoursework1\RogueLike
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 239}
-    m_SelectedIDs: 16ec0000
-    m_LastClickedID: 60438
-    m_ExpandedIDs: 0000000072e5000074e5000076e5000078e500007ae500007ce500007ee5000080e5000082e5000084e5000086e5000088e500008ce5000092e50000b8e5000094ec000000ca9a3b
+    scrollPos: {x: 0, y: 271}
+    m_SelectedIDs: 84240200
+    m_LastClickedID: 140420
+    m_ExpandedIDs: 000000000a1601000c1601000e16010010160100121601001416010016160100181601001a1601001c1601001e1601002016010022160100241601002c16010066240200742402007c240200802402008424020000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -620,7 +620,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000072e5000074e5000076e5000078e500007ae500007ce500007ee5000080e5000082e5000084e5000086e5000088e500008ae500008ce50000
+    m_ExpandedIDs: 000000000a1601000c1601000e16010010160100121601001416010016160100181601001a1601001c1601001e16010020160100221601002416010026160100
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -707,23 +707,23 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: a8b50000
-      m_LastClickedID: 46504
-      m_ExpandedIDs: 2cfbffff669a000062c3000060ce0000badb000092dd0000
+      m_SelectedIDs: 46650100
+      m_LastClickedID: 91462
+      m_ExpandedIDs: ea47ffff00d2ffff26610100acd201001cef0100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Red
-        m_OriginalName: Red
+        m_Name: 
+        m_OriginalName: 
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -75622
+        m_UserData: 0
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
-        m_OriginalEventType: 0
+        m_OriginalEventType: 11
         m_IsRenamingFilename: 0
         m_ClientGUIView: {fileID: 4}
       m_SearchString: 
@@ -980,9 +980,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 16.129559, y: 15.939016, z: -1038.6174}
+    m_Target: {x: 1.5724427, y: 41.521355, z: -171.17021}
     speed: 2
-    m_Value: {x: 16.129559, y: 15.939016, z: -1038.6174}
+    m_Value: {x: 1.5724427, y: 41.521355, z: -171.17021}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1029,13 +1029,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.0030971004, y: 0.9693871, z: -0.24525252, w: 0.01221023}
+    m_Target: {x: -0.0022963395, y: -0.98477334, z: 0.17340346, w: -0.012988029}
     speed: 2
-    m_Value: {x: 0.0031153823, y: 0.96900904, z: -0.246704, w: 0.012205456}
+    m_Value: {x: -0.0020362101, y: -0.98478127, z: 0.17340487, w: -0.011510733}
   m_Size:
-    m_Target: 35.223717
+    m_Target: 18.41017
     speed: 2
-    m_Value: 35.223717
+    m_Value: 18.41017
   m_Ortho:
     m_Target: 0
     speed: 2
