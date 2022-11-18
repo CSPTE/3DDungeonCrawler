@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    public float health = 50f;
+    public static float health;
+    public float inputHealth;
+    private Animator anim;
+
+    void Start(){
+        anim = GetComponent<Animator>();
+        Target.health = inputHealth;
+    }
 
     public void TakeDamage (float amount){
         health -= amount;
@@ -14,6 +21,11 @@ public class Target : MonoBehaviour
     }
 
     void Die(){
-        Destroy(gameObject);
+        anim.SetTrigger("Die");
+        Destroy(gameObject, 4f);
+    }
+
+    public static float GetHealth(){
+        return health;
     }
 }
