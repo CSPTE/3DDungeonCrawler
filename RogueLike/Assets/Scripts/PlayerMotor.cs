@@ -24,6 +24,9 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] float stepSmooth = 0.1f;
 
     public GameObject dungeon;
+    [Header ("Player settings:")]
+    [SerializeField] public int currentHealth;
+    //static int healthToHandle;
     private GameObject currentFloor;
     private int currentGemTarget;
     private int currentGemsCollected;
@@ -37,7 +40,7 @@ public class PlayerMotor : MonoBehaviour
 
     public TextMeshProUGUI GemCount;
     public TextMeshProUGUI HealthCount;
-    private int currentHealth = 10;
+    
 
     private bool tutorial = true;
     public Canvas tutorial1;
@@ -57,6 +60,7 @@ public class PlayerMotor : MonoBehaviour
         UpdateCurrentRoom();
         background.Play();
         SetHealthCount(currentHealth);
+        //PlayerMotor.healthToHandle = currentHealth;
     }
 
     // Update is called once per frame
@@ -157,7 +161,14 @@ public class PlayerMotor : MonoBehaviour
         GemCount.text = current + "/" + total;
     }
 
-    void SetHealthCount(int health){
+    public int GetHealth(){
+        return currentHealth;
+    }
+
+    public void SetHealth(int toRemove){
+        currentHealth -= toRemove;
+    }
+    public void SetHealthCount(int health){
         HealthCount.text = health.ToString();
     }
 
