@@ -176,6 +176,10 @@ public class PlayerMotor : MonoBehaviour
         currentHealth -= toRemove;
         hurt.Play();
     }
+    public void gainHealthFromKill(){
+        currentHealth = currentHealth + 1;
+        SetHealthCount(currentHealth);
+    }
     public void SetHealthCount(int health){
         HealthCount.text = health.ToString();
     }

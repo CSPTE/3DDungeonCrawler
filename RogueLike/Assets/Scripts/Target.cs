@@ -11,6 +11,7 @@ public class Target : MonoBehaviour
 
     public int ID;
     public Canvas youWin;
+    public GameObject player;
 
     void Start(){
         anim = GetComponent<Animator>();
@@ -29,6 +30,7 @@ public class Target : MonoBehaviour
         if (ID == 3){
             loadGameOverPanel();
         }
+        player.GetComponent<PlayerMotor>().gainHealthFromKill();
         Destroy(gameObject, 4f);
     }
 

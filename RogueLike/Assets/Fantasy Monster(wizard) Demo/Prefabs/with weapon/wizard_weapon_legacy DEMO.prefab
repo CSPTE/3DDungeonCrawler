@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 111000010215138216}
   - component: {fileID: 6558104572306472766}
   - component: {fileID: 6325044566550604406}
-  - component: {fileID: 8827159768570140718}
+  - component: {fileID: 6248026789686172106}
   m_Layer: 0
   m_Name: wizard_weapon_legacy DEMO
   m_TagString: Untagged
@@ -124,7 +124,7 @@ CapsuleCollider:
   m_Height: 12
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
---- !u!114 &8827159768570140718
+--- !u!114 &6248026789686172106
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,9 +136,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b378a6f935730545930af0050df71a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  inputHealth: 0
+  health: 10
+  inputHealth: 10
   ID: 2
+  youWin: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &1000010307727294
 GameObject:
   m_ObjectHideFlags: 0

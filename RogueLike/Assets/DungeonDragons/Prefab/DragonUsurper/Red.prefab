@@ -981,7 +981,7 @@ GameObject:
   - component: {fileID: 13772040}
   - component: {fileID: 2206157777717936010}
   - component: {fileID: 8431464237841101826}
-  - component: {fileID: 2231349736699130847}
+  - component: {fileID: 1186973717801366221}
   m_Layer: 0
   m_Name: Dragon
   m_TagString: Untagged
@@ -1206,7 +1206,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: f3c4af16992f14c43a050675b9be2f68, type: 3}
---- !u!114 &2231349736699130847
+--- !u!114 &1186973717801366221
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1221,6 +1221,8 @@ MonoBehaviour:
   health: 100
   inputHealth: 100
   ID: 3
+  youWin: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &137012
 GameObject:
   m_ObjectHideFlags: 0
