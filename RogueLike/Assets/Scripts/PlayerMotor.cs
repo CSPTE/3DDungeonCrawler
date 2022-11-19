@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerMotor : MonoBehaviour
 {   
@@ -37,6 +38,7 @@ public class PlayerMotor : MonoBehaviour
     public AudioSource step;
     public AudioSource jump;
     public AudioSource background;
+    public AudioSource hurt;
 
     public TextMeshProUGUI GemCount;
     public TextMeshProUGUI HealthCount;
@@ -50,6 +52,8 @@ public class PlayerMotor : MonoBehaviour
     private Button turnOffTutorialButton;
     private Button okButton;
     private int currentTutorial = 1;
+
+    public Canvas gameOver;
 
     // Start is called before the first frame update
     void Start()
@@ -68,6 +72,9 @@ public class PlayerMotor : MonoBehaviour
     {
         isGrounded = controller.isGrounded;
         stepClimb();
+        if (currentHealth <= 0){
+            loadGameOverPanel(gameOver);
+        }
     }
 
     //receive input for InputManager.cs and use them to our character controller
@@ -96,11 +103,11 @@ public class PlayerMotor : MonoBehaviour
         //program goes here but it probably never goes into the if statements need to check why
         RaycastHit hitLower;
         if(Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(Vector3.forward), out hitLower, 0.5f)){
-            Debug.Log("Went through the first if statement");
+            //Debug.Log("Went through the first if statement");
             RaycastHit hitUpper;
             if(!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.8f)){
                 rigidBody.position -= new Vector3(0f, -stepSmooth, 0f);
-                Debug.Log("Second if statement");
+                //Debug.Log("Second if statement");
             }
         }
     }
@@ -167,6 +174,11 @@ public class PlayerMotor : MonoBehaviour
 
     public void SetHealth(int toRemove){
         currentHealth -= toRemove;
+        hurt.Play();
+    }
+    public void gainHealthFromKill(){
+        currentHealth = currentHealth + 1;
+        SetHealthCount(currentHealth);
     }
     public void SetHealthCount(int health){
         HealthCount.text = health.ToString();
@@ -220,6 +232,15 @@ public class PlayerMotor : MonoBehaviour
 
     void stopRenderingCanvas(Canvas can){
         can.GetComponent<Canvas>().gameObject.SetActive(false);
+    }
+
+    void loadGameOverPanel(Canvas can){
+        can.GetComponent<Canvas>().gameObject.SetActive(true);
+    }
+
+    public void RestartGame(Canvas can) {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
+        stopRenderingCanvas(can);
     }
 
 }

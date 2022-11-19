@@ -1726,7 +1726,7 @@ GameObject:
   - component: {fileID: 11447264}
   - component: {fileID: 7126394943919456686}
   - component: {fileID: 7787972972625411974}
-  - component: {fileID: 2735648062406543943}
+  - component: {fileID: -8631947239594950205}
   m_Layer: 0
   m_Name: Centaur
   m_TagString: Enemy
@@ -1804,10 +1804,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a00096c0b077240bed967845837081, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerToFollow: {fileID: 0}
+  minDistance: 0
+  playerMotor: {fileID: 0}
   speed: 1
-  runSpeed: 3
+  runSpeed: 5
   turnSpeed: 60
   gravity: 20
+  target: {fileID: 0}
 --- !u!64 &7126394943919456686
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1838,7 +1842,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2735648062406543943
+--- !u!114 &-8631947239594950205
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1851,6 +1855,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 20
+  inputHealth: 20
+  ID: 1
+  youWin: {fileID: 0}
+  player: {fileID: 0}
 --- !u!1 &136472
 GameObject:
   m_ObjectHideFlags: 0

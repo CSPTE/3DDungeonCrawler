@@ -16,6 +16,8 @@ public class Gun : MonoBehaviour
     private GameObject child;
     private float timestamp;
 
+    public AudioSource gunSound;
+
     //private bool isAiming = false;
 
     void Start(){
@@ -58,6 +60,7 @@ public class Gun : MonoBehaviour
             GameObject impactGO = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(impactGO, 2f);
 
+            gunSound.Play();
         }
     }
 
