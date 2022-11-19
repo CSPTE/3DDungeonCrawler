@@ -8,108 +8,99 @@ public class Centaur_ctrl : MonoBehaviour {
 	[SerializeField] private Transform playerToFollow;
 	[SerializeField] private float minDistance;
 	public PlayerMotor playerMotor;
-	private Animator anim;
-	private CharacterController controller;
-	private int battle_state = 0;
 
 	[Header ("Enemy settings:")]
-	public float speed = 6.0f;
-	public float runSpeed = 3.0f;
-	public float turnSpeed = 60.0f;
-	public float gravity = 20.0f;
-	private float actualSpeed = 3.0f;
-	private Vector3 moveDirection = Vector3.zero;
-	private float animationLength;
-	private bool isFirstAttack = false;
-	private bool isFirstWalk = true;
+	public Target target;
+
 	private float startTime;
 	private float distance;
-	private bool shouldTakeDamage;
+	private bool shouldTakeDamage = true;
+	private Animation animation;
 	private NavMeshAgent nav;
-	private float y_position;
 	
-	private float w_sp = 0.0f;
-	private float r_sp = 0.0f;
-	private bool armed = true;
-	
+
 	void Start () 
 	{						
-		anim = GetComponent<Animator>();
-		controller = GetComponent<CharacterController> ();
-		w_sp = speed; //read walk speed
-		r_sp = runSpeed; //read run speed
-		battle_state = 0;
-		runSpeed = 1;
-		nav = GetComponent<NavMeshAgent>();
-		y_position = transform.localPosition.y;
-
+		animation = gameObject.GetComponent<Animation>();
+		nav = gameObject.GetComponent<NavMeshAgent>();
+		animation.Play("Centaur_rig_walk2");
 	}
 	
+
 	void Update () 
 	{		
+		//calculate distance
+		distance = Vector3.Distance(transform.position, playerToFollow.position);
 		
-		if(Target.GetHealth() > 0f) ProcessMoveCentaur();
-		
+		if(target.GetHealth() > 0f && distance < minDistance) {	
+			ProcessMoveCentaur();
+		} else {
+			if(target.GetHealth() > 0f){
+				ProcessIdleMovement();
+			}
+			
+		}
 	}
+
 
 	void ProcessMoveCentaur(){
 			if (playerToFollow == null) {
 				return;
 			}
 			
-			
-			isFirstAttack = true;
-			//calculate distance
-			distance = Vector3.Distance(transform.position, playerToFollow.position);
-
 			if((distance < minDistance) && (distance > 8f)) {
 				//look at the player
 				transform.LookAt(playerToFollow);
-				anim.SetBool("isPlayerCloseEnough", false);
-				anim.SetInteger("moving", 1);
+
+				//play the walking animation
+				if(!animation.IsPlaying("Centaur_rig_walk2")) {
+					animation.Play("Centaur_rig_walk2");
+				}
 				nav.SetDestination(playerToFollow.position);
 				startTime = Time.time;
 			} else {
-				shouldTakeDamage = true;
 				handleAttack();
 			}
 
 		}
 	
+
 	void handleAttack(){
 		//look at the player when attacking
 		transform.LookAt(playerToFollow);
 		
-
-		if(isFirstAttack) {
-			anim.SetInteger("moving", 50);
-			isFirstAttack = false;
-		}
-
-
-		if(startTime +2.2f <= Time.time){
-			startTime = Time.time;	
-			anim.SetBool("isPlayerCloseEnough", true);	
+		//check if we need to play the animation or not
+		if(!animation.IsPlaying("Centaur_rig_attack3")){
+			animation.Play("Centaur_rig_attack3");
 			shouldTakeDamage = true;
-			
+			startTime = Time.time;
 		}
 
-		HandleDamage(shouldTakeDamage);
-
-
-	}
-
-	//handle the damage taken
-	void HandleDamage(bool temp){
-		var currentClip = anim.GetCurrentAnimatorStateInfo(0);
-
-		if(temp && (currentClip.normalizedTime < 0.55) && (currentClip.normalizedTime > 0.52) && (Vector3.Distance(transform.position, playerToFollow.position) < 8f)){
+		//check if we need to take damage
+		if((startTime + 1.5f <= Time.time) && (Vector3.Distance(transform.position, playerToFollow.position) < 8f) && shouldTakeDamage){
 			shouldTakeDamage = false;
 			playerMotor.SetHealthCount(playerMotor.GetHealth() - 1);
 			playerMotor.SetHealth(1);
 		}
+
 	}
+
+
+	void ProcessIdleMovement(){
+		//need to write this
+		if(!animation.Play("Centaur_rig_idle1")) {
+			animation.Play("Centaur_rig_idle1");
+		}
+		
+	}
+
+
+	public void Death(){
+		//play the deat animation
+		if(!animation.Play("Centaur_rig_death1")){
+			animation.Play("Centaur_rig_death1");
+		}
+		
+	}
+
 }
-
-
-

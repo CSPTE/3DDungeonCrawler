@@ -12,6 +12,8 @@ TagManager:
   - LockFloor
   - TutorialWall
   - Enemy
+  - Wizard
+  - Centaur
   layers:
   - Default
   - TransparentFX
