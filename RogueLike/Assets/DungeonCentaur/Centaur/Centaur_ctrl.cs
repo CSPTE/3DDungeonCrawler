@@ -19,6 +19,7 @@ public class Centaur_ctrl : MonoBehaviour {
 	public float gravity = 20.0f;
 	private float actualSpeed = 3.0f;
 	private Vector3 moveDirection = Vector3.zero;
+	public Target target;
 	private float animationLength;
 	private bool isFirstAttack = false;
 	private bool isFirstWalk = true;
@@ -42,13 +43,14 @@ public class Centaur_ctrl : MonoBehaviour {
 		runSpeed = 1;
 		nav = GetComponent<NavMeshAgent>();
 		y_position = transform.localPosition.y;
+		//Debug.Log(Target.GetHealth());
 
 	}
 	
 	void Update () 
 	{		
-		
-		if(Target.GetHealth() > 0f) ProcessMoveCentaur();
+		//Debug.Log(Target.GetHealth());
+		if(target.GetHealth() > 0f) ProcessMoveCentaur();
 		
 	}
 
