@@ -97,6 +97,7 @@ public class Centaur_ctrl : MonoBehaviour {
 
 	public void Death(){
 		//play the deat animation
+		Debug.Log("Centaur should die");
 		if(!animation.Play("Centaur_rig_death1")){
 			animation.Play("Centaur_rig_death1");
 		}
