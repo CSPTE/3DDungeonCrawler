@@ -26,12 +26,18 @@ public class PlayerMotor : MonoBehaviour
 
     public GameObject dungeon;
     [Header ("Player settings:")]
+    [SerializeField] public GameObject shield;
+    [SerializeField] public GameObject gun;
+    [SerializeField] public GameObject spear;
     [SerializeField] public int currentHealth;
     //static int healthToHandle;
     private GameObject currentFloor;
     private int currentGemTarget;
     private int currentGemsCollected;
     private int newFloorPlace = 0;
+    public bool isShieldActivated = false;
+    public bool isGunActivated = false;
+    public bool isSpearActivated = true;
 
     public AudioSource collectGemSound;
     public AudioSource floorDoorUnlockLock;
@@ -52,6 +58,7 @@ public class PlayerMotor : MonoBehaviour
     private Button turnOffTutorialButton;
     private Button okButton;
     private int currentTutorial = 1;
+    private float tempSpeed;
 
     public Canvas gameOver;
 
@@ -64,12 +71,46 @@ public class PlayerMotor : MonoBehaviour
         UpdateCurrentRoom();
         background.Play();
         SetHealthCount(currentHealth);
+        shield.SetActive(isShieldActivated);
+        gun.SetActive(isGunActivated);
+        spear.SetActive(isSpearActivated);
+        tempSpeed = speed;
         //PlayerMotor.healthToHandle = currentHealth;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
-    {
+    void Update()
+    {   
+        if(Input.GetKeyDown(KeyCode.Q)) {
+            isShieldActivated = !isShieldActivated;
+            shield.SetActive(isShieldActivated);
+            isGunActivated = false;
+            gun.SetActive(isGunActivated);
+            isSpearActivated = false;
+            spear.SetActive(isSpearActivated);
+        }
+
+        if(Input.GetKeyDown(KeyCode.E)){
+            isGunActivated = !isGunActivated;
+            gun.SetActive(isGunActivated);
+            isShieldActivated = false;
+            shield.SetActive(isShieldActivated);
+            isSpearActivated = false;
+            spear.SetActive(isSpearActivated);
+        }
+
+        if(Input.GetKeyDown(KeyCode.C)){
+            isGunActivated = false;
+            isShieldActivated = false;
+            isSpearActivated = !isSpearActivated;
+            gun.SetActive(isGunActivated);
+            shield.SetActive(isShieldActivated);
+            spear.SetActive(isSpearActivated);
+        }
+
+        if(isShieldActivated) tempSpeed=0;
+        else tempSpeed = speed;
+
         isGrounded = controller.isGrounded;
         stepClimb();
         if (currentHealth <= 0){
@@ -83,7 +124,7 @@ public class PlayerMotor : MonoBehaviour
         Vector3 moveDirection = Vector3.zero;
         moveDirection.x = input.x;
         moveDirection.z = input.y;
-        controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
+        controller.Move(transform.TransformDirection(moveDirection) * tempSpeed * Time.deltaTime);
         playerVelocity.y += gravity * Time.deltaTime;
         if(isGrounded && playerVelocity.y < 0)
             playerVelocity.y = -2f;
@@ -173,8 +214,13 @@ public class PlayerMotor : MonoBehaviour
     }
 
     public void SetHealth(int toRemove){
-        currentHealth -= toRemove;
-        hurt.Play();
+        if(!isShieldActivated){
+            currentHealth -= toRemove;
+            hurt.Play();
+        } else {
+            //TODO put some blocking sound here with the shield
+        }
+        
     }
     public void gainHealthFromKill(){
         currentHealth = currentHealth + 1;

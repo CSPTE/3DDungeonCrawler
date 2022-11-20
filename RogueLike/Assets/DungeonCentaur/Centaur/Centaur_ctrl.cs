@@ -79,8 +79,9 @@ public class Centaur_ctrl : MonoBehaviour {
 		//check if we need to take damage
 		if((startTime + 1.5f <= Time.time) && (Vector3.Distance(transform.position, playerToFollow.position) < 8f) && shouldTakeDamage){
 			shouldTakeDamage = false;
-			playerMotor.SetHealthCount(playerMotor.GetHealth() - 1);
 			playerMotor.SetHealth(1);
+			playerMotor.SetHealthCount(playerMotor.GetHealth());
+			
 		}
 
 	}
@@ -97,7 +98,6 @@ public class Centaur_ctrl : MonoBehaviour {
 
 	public void Death(){
 		//play the deat animation
-		Debug.Log("Centaur should die");
 		if(!animation.Play("Centaur_rig_death1")){
 			animation.Play("Centaur_rig_death1");
 		}

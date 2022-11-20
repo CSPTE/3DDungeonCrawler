@@ -9,6 +9,7 @@ public class Gun : MonoBehaviour
     public float range = 100f;
     public Camera fspCam;
     public ParticleSystem muzzleFlash;
+    public PlayerMotor playerMotor;
     public GameObject impactEffect;
     public float impactForce = 30f;
     public float aimSpeed = 10f;
@@ -22,13 +23,13 @@ public class Gun : MonoBehaviour
 
     void Start(){
         
-        //child = transform.GetChild(0).gameObject;
-        //anim = child.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!playerMotor.isGunActivated) return;
+
         if(Input.GetMouseButtonDown(0)){
             Shoot();
             timestamp = Time.time + 0.4f;
@@ -67,6 +68,8 @@ public class Gun : MonoBehaviour
     void Aim(bool isAiming){
         var start = transform.localPosition;
         var aimpos = transform.localPosition;
+
+        //TODO decrease the mouse sensitivity and the speed
 
         if(isAiming){
             transform.localPosition = new Vector3(0f, start.y, start.z);
