@@ -13,11 +13,13 @@ public class Target : MonoBehaviour
     private WizardScript3 wizardScript;
     private Centaur_ctrl centaurScript;
     private DragonScript dragonScript;
+    private float originalHealth;
 
     public Canvas youWinCanvas;
 
 
     void Start(){
+        originalHealth = health;
         anim = GetComponent<Animator>();
         //health = inputHealth;
         if(gameObject.tag == "Wizard") wizardScript = gameObject.GetComponent<WizardScript3>();
@@ -40,7 +42,7 @@ public class Target : MonoBehaviour
     }
 
     void Die(){
-        playerMotor.HandleKillUpgrade();
+        if (gameObject.tag != "Dragon") playerMotor.HandleKillUpgrade();
         if(gameObject.tag == "Wizard"){
             wizardScript.Death();
             Destroy(gameObject, 7f);
@@ -74,5 +76,9 @@ public class Target : MonoBehaviour
     public void RestartGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
         stopRenderingCanvas();
+    }
+
+    public float GetOriginalHealth(){
+        return originalHealth;
     }
 }

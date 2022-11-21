@@ -23,7 +23,7 @@ public class DragonScript : MonoBehaviour
     private bool isFirstAttack;
     private bool takeDamageIfInside;
     private bool shouldTakeDamage;
-    private bool playTakeOff = true;
+    private bool isNavStopped = false;
     //private Random random;
     // Start is called before the first frame update
     void Start()
@@ -51,14 +51,15 @@ public class DragonScript : MonoBehaviour
 
     void ProcessDragonMove(){
         transform.LookAt(playerToFollow);
-        if(distance > 15f && playFlame){
+        if(distance > 25f && playFlame){
             nav.isStopped = true;
+            isNavStopped = true;
             playFlame = false;
             Flame();
             StartCoroutine(WaitForFlamePlay(waitBetweenFlames));
         }
-        if(distance > 7f){
-            nav.isStopped = false;
+        if(distance > 10f && !isNavStopped){
+            
             if(!animation.IsPlaying("Run")){
                 animation.Play("Run");
             }
@@ -79,12 +80,12 @@ public class DragonScript : MonoBehaviour
 
     bool CheckIfDragonIdleAnimationNotPlaying(){
         return (!animation.IsPlaying("Idle01") && !animation.IsPlaying("Scream") && !animation.IsPlaying("Idle02") && !animation.IsPlaying("Sleep") 
-        && !animation.IsPlaying("Take off") && !animation.IsPlaying("Land"));
+        && !animation.IsPlaying("Take off") && !animation.IsPlaying("Land") && !animation.IsPlaying("Flame Attack"));
     }
 
     bool CheckIfAttackAnimationIsNotPlaying(){
         return (!animation.IsPlaying("Basic Attack") && !animation.IsPlaying("Claw Attack") && !animation.IsPlaying("Flame Attack")
-         && !animation.IsPlaying("Get Hit"));
+         && !animation.IsPlaying("Get Hit") && !animation.IsPlaying("Flame Attack"));
     }
 
     void DecideWhichAnimationToPlay(float temp){
@@ -147,7 +148,6 @@ public class DragonScript : MonoBehaviour
             takeDamageIfInside = false;
             playerMotor.SetHealthCount(playerMotor.GetHealth() - damage);
 			playerMotor.SetHealth(damage);
-            Debug.Log("There was a collision");
         }
     }
 
@@ -159,17 +159,24 @@ public class DragonScript : MonoBehaviour
     void Flame(){
         transform.LookAt(playerToFollow);
         animation.Play("Flame Attack");
-
+        StartCoroutine(StopTheDragon(2));
         for(float i =-1; i < 1;){
             if(shouldSpawnFlame){
+                //shouldSpawnFlame = false;
                 Vector3 positionToSpawn = new Vector3(projectileSpawnpoint.position.x + i, projectileSpawnpoint.position.y, projectileSpawnpoint.position.z);
                 Instantiate(projectilePrefab, positionToSpawn, transform.rotation);
-                StartCoroutine(WaitForFlame(0.1f));
+                //StartCoroutine(WaitForFlame(0.00001f));
                 i = i + 0.05f;
             }
         }
 
         
+    }
+
+    IEnumerator StopTheDragon(float delay){
+        yield return new WaitForSeconds(delay);
+        nav.isStopped = false;
+        isNavStopped = false;
     }
 
     IEnumerator WaitForFlame(float delay){

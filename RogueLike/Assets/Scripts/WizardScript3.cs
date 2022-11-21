@@ -21,6 +21,7 @@ public class WizardScript3 : MonoBehaviour
     private float countBetweenFire = 1f;
     private Animation animation;
 
+
     
     private NavMeshAgent nav;
     // Start is called before the first frame update
@@ -77,8 +78,11 @@ public class WizardScript3 : MonoBehaviour
     }
 
     public void Death(){
-        Instantiate(deathParticles, deathParticlePosition.position, transform.rotation);
+        nav.enabled = false;
+        GameObject temp = Instantiate(deathParticles, deathParticlePosition.position, Quaternion.identity);
+        Destroy(temp, 7f);
         animation.Play("dead");
+        
     }
 
     public void Hit(){
