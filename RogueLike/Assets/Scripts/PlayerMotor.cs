@@ -37,7 +37,7 @@ public class PlayerMotor : MonoBehaviour
     private int newFloorPlace = 0;
     public bool isShieldActivated = false;
     public bool isGunActivated = false;
-    public bool isSpearActivated = true;
+    public bool isSpearActivated = false;
 
     public AudioSource collectGemSound;
     public AudioSource floorDoorUnlockLock;
@@ -45,6 +45,7 @@ public class PlayerMotor : MonoBehaviour
     public AudioSource jump;
     public AudioSource background;
     public AudioSource hurt;
+    public AudioSource shieldSound;
 
     public TextMeshProUGUI GemCount;
     public TextMeshProUGUI HealthCount;
@@ -61,6 +62,10 @@ public class PlayerMotor : MonoBehaviour
     private float tempSpeed;
 
     public Canvas gameOver;
+    public GameObject tutorialWall2;
+    public GameObject tutorialWall3;
+    public GameObject tutorialWall4;
+    private bool wasGemCollected = false;
 
     // Start is called before the first frame update
     void Start()
@@ -73,7 +78,7 @@ public class PlayerMotor : MonoBehaviour
         SetHealthCount(currentHealth);
         shield.SetActive(isShieldActivated);
         gun.SetActive(isGunActivated);
-        spear.SetActive(isSpearActivated);
+        spear.SetActive(false);
         tempSpeed = speed;
         //PlayerMotor.healthToHandle = currentHealth;
     }
@@ -99,7 +104,7 @@ public class PlayerMotor : MonoBehaviour
             spear.SetActive(isSpearActivated);
         }
 
-        if(Input.GetKeyDown(KeyCode.C)){
+        if(Input.GetKeyDown(KeyCode.R)){
             isGunActivated = false;
             isShieldActivated = false;
             isSpearActivated = !isSpearActivated;
@@ -164,6 +169,7 @@ public class PlayerMotor : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Gem")){
+            wasGemCollected = true;
             other.gameObject.SetActive(false);
             collectGemSound.Play();
             currentGemsCollected++;
@@ -177,19 +183,24 @@ public class PlayerMotor : MonoBehaviour
         if(other.gameObject.CompareTag("TutorialWall")){
             if(currentTutorial == 2){
                 loadNextTutorial(tutorial2);
+                tutorialWall2.gameObject.SetActive(false);
             } else if (currentTutorial == 3){
                 loadNextTutorial(tutorial3);
+                tutorialWall3.gameObject.SetActive(false);
             } else if (currentTutorial == 4){
                 loadNextTutorial(tutorial4);
+                tutorialWall4.gameObject.SetActive(false);
             } else {
                 loadNextTutorial(tutorial1);
+                //tutorialWall2.gameObject.SetActive(false);
             }    
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.CompareTag("LockFloor")){
+        if((other.gameObject.CompareTag("LockFloor")) && (gameObject.CompareTag("Player")) && wasGemCollected){
+            wasGemCollected = false;
             other.gameObject.GetComponent<MeshRenderer>().enabled = true;
             floorDoorUnlockLock.Play();
             UpdateCurrentRoom();
@@ -220,6 +231,7 @@ public class PlayerMotor : MonoBehaviour
             hurt.Play();
         } else {
             //TO-DO put some blocking sound here with the shield
+            shieldSound.Play();
         }
         
     }
