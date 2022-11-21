@@ -29,6 +29,7 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] public GameObject shield;
     [SerializeField] public GameObject gun;
     [SerializeField] public GameObject spear;
+    [SerializeField] public float bulletCount;
     [SerializeField] public int currentHealth;
     [SerializeField] public Gun gunScript;
     [SerializeField] public SpearScript spearScript;
@@ -53,6 +54,7 @@ public class PlayerMotor : MonoBehaviour
     
 
     private bool tutorial = true;
+    
     public Canvas tutorial1;
     public Canvas tutorial2;
     public Canvas tutorial3;
@@ -227,10 +229,12 @@ public class PlayerMotor : MonoBehaviour
         }
         
     }
+
     public void gainHealthFromKill(){
         currentHealth = currentHealth + 1;
         SetHealthCount(currentHealth);
     }
+
     public void SetHealthCount(int health){
         if(health >= 0) HealthCount.text = health.ToString();
         else HealthCount.text = "0";
@@ -293,6 +297,25 @@ public class PlayerMotor : MonoBehaviour
     public void RestartGame(Canvas can) {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
         stopRenderingCanvas(can);
+    }
+
+
+    public void HandleKillUpgrade(){
+        Debug.Log("Upgrade was called");
+        bulletCount += Random.Range(1,3);
+        if(Random.Range(0,2) == 0) {
+            currentHealth += 1;
+            SetHealthCount(currentHealth);
+        }
+    }
+
+
+    public float GetBulletCount(){
+        return bulletCount;
+    }
+
+    public void SetBulletCount(){
+        bulletCount -= 1;
     }
 
 }

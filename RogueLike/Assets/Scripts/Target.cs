@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    public float health;
+    [SerializeField] public float health;
+    [SerializeField] public PlayerMotor playerMotor;
     private Animator anim;
     private GameObject wizard;
     private WizardScript3 wizardScript;
@@ -36,6 +37,7 @@ public class Target : MonoBehaviour
     }
 
     void Die(){
+        playerMotor.HandleKillUpgrade();
         if(gameObject.tag == "Wizard"){
             wizardScript.Death();
             Destroy(gameObject, 7f);

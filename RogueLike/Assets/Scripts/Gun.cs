@@ -44,7 +44,8 @@ public class Gun : MonoBehaviour
     }
 
     void Shoot(){
-        if(shouldShoot){
+        if(shouldShoot && playerMotor.GetBulletCount() > 0){
+            playerMotor.SetBulletCount();
             shouldShoot = false;
             StartCoroutine(WaitBeforeShoot());
             muzzleFlash.Play();
