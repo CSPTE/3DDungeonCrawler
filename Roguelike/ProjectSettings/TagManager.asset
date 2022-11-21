@@ -15,6 +15,7 @@ TagManager:
   - Wizard
   - Centaur
   - Dragon
+  - Weapon
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class Target : MonoBehaviour
@@ -12,6 +13,8 @@ public class Target : MonoBehaviour
     private WizardScript3 wizardScript;
     private Centaur_ctrl centaurScript;
     private DragonScript dragonScript;
+
+    public Canvas youWinCanvas;
 
 
     void Start(){
@@ -50,11 +53,26 @@ public class Target : MonoBehaviour
 
         if(gameObject.tag == "Dragon"){
              dragonScript.Death();
+             //TODO lead win panel
+             loadGameOverPanel();
         }
         
     }
 
     public float GetHealth(){
         return health;
+    }
+
+    void loadGameOverPanel(){
+        youWinCanvas.GetComponent<Canvas>().gameObject.SetActive(true);
+    }
+
+    void stopRenderingCanvas(){
+        youWinCanvas.GetComponent<Canvas>().gameObject.SetActive(false);
+    }
+
+    public void RestartGame() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
+        stopRenderingCanvas();
     }
 }
