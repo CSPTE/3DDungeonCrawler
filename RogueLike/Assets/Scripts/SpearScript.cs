@@ -14,8 +14,6 @@ public class SpearScript : MonoBehaviour
     private bool isFirstAttack = true;
     private bool takeDamageIfInside;
     private bool spearRateControl = true;
-    
-    public AudioSource spearSound;
 
     // Update is called once per frame
     void Update()
@@ -25,7 +23,6 @@ public class SpearScript : MonoBehaviour
             takeDamageIfInside = true;
             HandleAnimation();
             StartCoroutine(WaitForSpear(spearRate));
-            spearSound.Play();
         }
 
         
@@ -56,7 +53,6 @@ public class SpearScript : MonoBehaviour
             takeDamageIfInside = false;
             isFirstAttack = false;
             other.gameObject.GetComponent<Target>().TakeDamage(damage);
-            //spearSound.Play();
         }
     }
 
@@ -65,8 +61,12 @@ public class SpearScript : MonoBehaviour
             takeDamageIfInside = false;
             isFirstAttack = false;
             other.gameObject.GetComponent<Target>().TakeDamage(damage);
-            //spearSound.Play();
         }
     }
+
+    public void SetUsageFromOtherScript(){
+        spearRateControl = true;
+    }
+
 
 }

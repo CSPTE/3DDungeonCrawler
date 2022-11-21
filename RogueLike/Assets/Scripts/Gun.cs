@@ -44,7 +44,8 @@ public class Gun : MonoBehaviour
     }
 
     void Shoot(){
-        if(shouldShoot){
+        if(shouldShoot && playerMotor.GetBulletCount() > 0){
+            playerMotor.SetBulletCount();
             shouldShoot = false;
             StartCoroutine(WaitBeforeShoot());
             muzzleFlash.Play();
@@ -87,6 +88,10 @@ public class Gun : MonoBehaviour
     IEnumerator WaitBeforeShoot()
     {
         yield return new WaitForSeconds(howMuchToWaitBetweenShots);
+        shouldShoot = true;
+    }
+
+    public void SetUsageFromOtherScript(){
         shouldShoot = true;
     }
 }

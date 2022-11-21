@@ -29,7 +29,10 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] public GameObject shield;
     [SerializeField] public GameObject gun;
     [SerializeField] public GameObject spear;
+    [SerializeField] public float bulletCount;
     [SerializeField] public int currentHealth;
+    [SerializeField] public Gun gunScript;
+    [SerializeField] public SpearScript spearScript;
     //static int healthToHandle;
     private GameObject currentFloor;
     private int currentGemTarget;
@@ -37,7 +40,7 @@ public class PlayerMotor : MonoBehaviour
     private int newFloorPlace = 0;
     public bool isShieldActivated = false;
     public bool isGunActivated = false;
-    public bool isSpearActivated = false;
+    public bool isSpearActivated = true;
 
     public AudioSource collectGemSound;
     public AudioSource floorDoorUnlockLock;
@@ -45,13 +48,14 @@ public class PlayerMotor : MonoBehaviour
     public AudioSource jump;
     public AudioSource background;
     public AudioSource hurt;
-    public AudioSource shieldSound;
 
     public TextMeshProUGUI GemCount;
     public TextMeshProUGUI HealthCount;
+    public TextMeshProUGUI BulletCount;
     
 
     private bool tutorial = true;
+    
     public Canvas tutorial1;
     public Canvas tutorial2;
     public Canvas tutorial3;
@@ -62,10 +66,6 @@ public class PlayerMotor : MonoBehaviour
     private float tempSpeed;
 
     public Canvas gameOver;
-    public GameObject tutorialWall2;
-    public GameObject tutorialWall3;
-    public GameObject tutorialWall4;
-    private bool wasGemCollected = false;
 
     // Start is called before the first frame update
     void Start()
@@ -76,9 +76,10 @@ public class PlayerMotor : MonoBehaviour
         UpdateCurrentRoom();
         background.Play();
         SetHealthCount(currentHealth);
+        BulletCount.text = bulletCount.ToString();
         shield.SetActive(isShieldActivated);
         gun.SetActive(isGunActivated);
-        spear.SetActive(false);
+        spear.SetActive(isSpearActivated);
         tempSpeed = speed;
         //PlayerMotor.healthToHandle = currentHealth;
     }
@@ -96,6 +97,7 @@ public class PlayerMotor : MonoBehaviour
         }
 
         if(Input.GetKeyDown(KeyCode.E)){
+            gunScript.SetUsageFromOtherScript();
             isGunActivated = !isGunActivated;
             gun.SetActive(isGunActivated);
             isShieldActivated = false;
@@ -104,7 +106,8 @@ public class PlayerMotor : MonoBehaviour
             spear.SetActive(isSpearActivated);
         }
 
-        if(Input.GetKeyDown(KeyCode.R)){
+        if(Input.GetKeyDown(KeyCode.C)){
+            spearScript.SetUsageFromOtherScript();
             isGunActivated = false;
             isShieldActivated = false;
             isSpearActivated = !isSpearActivated;
@@ -169,7 +172,6 @@ public class PlayerMotor : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Gem")){
-            wasGemCollected = true;
             other.gameObject.SetActive(false);
             collectGemSound.Play();
             currentGemsCollected++;
@@ -183,24 +185,19 @@ public class PlayerMotor : MonoBehaviour
         if(other.gameObject.CompareTag("TutorialWall")){
             if(currentTutorial == 2){
                 loadNextTutorial(tutorial2);
-                tutorialWall2.gameObject.SetActive(false);
             } else if (currentTutorial == 3){
                 loadNextTutorial(tutorial3);
-                tutorialWall3.gameObject.SetActive(false);
             } else if (currentTutorial == 4){
                 loadNextTutorial(tutorial4);
-                tutorialWall4.gameObject.SetActive(false);
             } else {
                 loadNextTutorial(tutorial1);
-                //tutorialWall2.gameObject.SetActive(false);
             }    
         }
     }
 
     void OnTriggerExit(Collider other)
     {
-        if((other.gameObject.CompareTag("LockFloor")) && (gameObject.CompareTag("Player")) && wasGemCollected){
-            wasGemCollected = false;
+        if(other.gameObject.CompareTag("LockFloor")){
             other.gameObject.GetComponent<MeshRenderer>().enabled = true;
             floorDoorUnlockLock.Play();
             UpdateCurrentRoom();
@@ -231,14 +228,15 @@ public class PlayerMotor : MonoBehaviour
             hurt.Play();
         } else {
             //TO-DO put some blocking sound here with the shield
-            shieldSound.Play();
         }
         
     }
+
     public void gainHealthFromKill(){
         currentHealth = currentHealth + 1;
         SetHealthCount(currentHealth);
     }
+
     public void SetHealthCount(int health){
         if(health >= 0) HealthCount.text = health.ToString();
         else HealthCount.text = "0";
@@ -302,5 +300,27 @@ public class PlayerMotor : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // loads current scene
         stopRenderingCanvas(can);
     }
+
+
+    public void HandleKillUpgrade(){
+        Debug.Log("Upgrade was called");
+        bulletCount += Random.Range(1,3);
+        if(Random.Range(0,2) == 0) {
+            currentHealth += 1;
+            SetHealthCount(currentHealth);
+        }
+        BulletCount.text = bulletCount.ToString();
+    }
+
+
+    public float GetBulletCount(){
+        return bulletCount;
+    }
+
+    public void SetBulletCount(){
+        bulletCount -= 1;
+        BulletCount.text = bulletCount.ToString();
+    }
+
 
 }

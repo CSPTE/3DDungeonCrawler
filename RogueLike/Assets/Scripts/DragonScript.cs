@@ -37,11 +37,6 @@ public class DragonScript : MonoBehaviour
     void Update()
     {
         distance = Vector3.Distance(transform.position, playerToFollow.position);
-        if(playFlame){
-            playFlame = false;
-            StartCoroutine(WaitForFlamePlay(waitBetweenFlames));
-            Flame();
-        }
         
         if( distance < minDistance && target.GetHealth() > 0f) {
             ProcessDragonMove();
@@ -60,6 +55,7 @@ public class DragonScript : MonoBehaviour
             nav.isStopped = true;
             playFlame = false;
             Flame();
+            StartCoroutine(WaitForFlamePlay(waitBetweenFlames));
         }
         if(distance > 7f){
             nav.isStopped = false;
@@ -172,6 +168,7 @@ public class DragonScript : MonoBehaviour
                 i = i + 0.05f;
             }
         }
+
         
     }
 
