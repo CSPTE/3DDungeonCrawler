@@ -51,6 +51,7 @@ public class PlayerMotor : MonoBehaviour
 
     public TextMeshProUGUI GemCount;
     public TextMeshProUGUI HealthCount;
+    public TextMeshProUGUI BulletCount;
     
 
     private bool tutorial = true;
@@ -75,6 +76,7 @@ public class PlayerMotor : MonoBehaviour
         UpdateCurrentRoom();
         background.Play();
         SetHealthCount(currentHealth);
+        BulletCount.text = bulletCount.ToString();
         shield.SetActive(isShieldActivated);
         gun.SetActive(isGunActivated);
         spear.SetActive(isSpearActivated);
@@ -307,6 +309,7 @@ public class PlayerMotor : MonoBehaviour
             currentHealth += 1;
             SetHealthCount(currentHealth);
         }
+        BulletCount.text = bulletCount.ToString();
     }
 
 
@@ -316,6 +319,8 @@ public class PlayerMotor : MonoBehaviour
 
     public void SetBulletCount(){
         bulletCount -= 1;
+        BulletCount.text = bulletCount.ToString();
     }
+
 
 }
