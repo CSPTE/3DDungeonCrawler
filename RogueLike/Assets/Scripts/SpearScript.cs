@@ -15,6 +15,8 @@ public class SpearScript : MonoBehaviour
     private bool takeDamageIfInside;
     private bool spearRateControl = true;
 
+    public AudioSource stabSound;
+
     // Update is called once per frame
     void Update()
     {
@@ -23,6 +25,7 @@ public class SpearScript : MonoBehaviour
             takeDamageIfInside = true;
             HandleAnimation();
             StartCoroutine(WaitForSpear(spearRate));
+            stabSound.Play();
         }
 
         
