@@ -213,12 +213,13 @@ public class PlayerMotor : MonoBehaviour
         return currentHealth;
     }
 
+
     public void SetHealth(int toRemove){
         if(!isShieldActivated){
             currentHealth -= toRemove;
             hurt.Play();
         } else {
-            //TODO put some blocking sound here with the shield
+            //TO-DO put some blocking sound here with the shield
         }
         
     }
@@ -227,7 +228,8 @@ public class PlayerMotor : MonoBehaviour
         SetHealthCount(currentHealth);
     }
     public void SetHealthCount(int health){
-        HealthCount.text = health.ToString();
+        if(health >= 0) HealthCount.text = health.ToString();
+        else HealthCount.text = "0";
     }
 
     void loadNextTutorial(Canvas can){

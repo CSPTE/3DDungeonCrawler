@@ -49,7 +49,7 @@ public class SpearScript : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other) {
-        if((other.gameObject.tag == "Wizard" || other.gameObject.tag == "Centaur") && shouldUseSpear && isFirstAttack){
+        if((other.gameObject.tag == "Wizard" || other.gameObject.tag == "Centaur" || other.gameObject.tag == "Dragon") && shouldUseSpear && isFirstAttack){
             takeDamageIfInside = false;
             isFirstAttack = false;
             other.gameObject.GetComponent<Target>().TakeDamage(damage);
@@ -57,7 +57,7 @@ public class SpearScript : MonoBehaviour
     }
 
     private void OnTriggerStay(Collider other){
-         if((other.gameObject.tag == "Wizard" || other.gameObject.tag == "Centaur") && shouldUseSpear && isFirstAttack && takeDamageIfInside){
+         if((other.gameObject.tag == "Wizard" || other.gameObject.tag == "Centaur" || other.gameObject.tag == "Dragon") && shouldUseSpear && isFirstAttack && takeDamageIfInside){
             takeDamageIfInside = false;
             isFirstAttack = false;
             other.gameObject.GetComponent<Target>().TakeDamage(damage);

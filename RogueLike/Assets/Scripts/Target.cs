@@ -6,17 +6,20 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     public float health;
-    //public float inputHealth = 20f;
     private Animator anim;
     private GameObject wizard;
-    public WizardScript3 wizardScript;
-    public Centaur_ctrl centaurScript;
+    private WizardScript3 wizardScript;
+    private Centaur_ctrl centaurScript;
+    private DragonScript dragonScript;
 
 
     void Start(){
         anim = GetComponent<Animator>();
         //health = inputHealth;
-        
+        if(gameObject.tag == "Wizard") wizardScript = gameObject.GetComponent<WizardScript3>();
+        if(gameObject.tag == "Centaur") centaurScript = gameObject.GetComponent<Centaur_ctrl>();
+        if(gameObject.tag == "Dragon") dragonScript = gameObject.GetComponent<DragonScript>();
+
         
     }
 
@@ -37,9 +40,14 @@ public class Target : MonoBehaviour
             wizardScript.Death();
             Destroy(gameObject, 7f);
         }
+
         if(gameObject.tag == "Centaur"){
             centaurScript.Death();
             Destroy(gameObject, 4f);
+        }
+
+        if(gameObject.tag == "Dragon"){
+             dragonScript.Death();
         }
         
     }
