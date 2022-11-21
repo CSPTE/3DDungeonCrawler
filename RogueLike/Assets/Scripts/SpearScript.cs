@@ -64,5 +64,9 @@ public class SpearScript : MonoBehaviour
         }
     }
 
+    public void SetUsageFromOtherScript(){
+        spearRateControl = true;
+    }
+
 
 }

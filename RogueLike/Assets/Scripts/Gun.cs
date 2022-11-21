@@ -89,4 +89,8 @@ public class Gun : MonoBehaviour
         yield return new WaitForSeconds(howMuchToWaitBetweenShots);
         shouldShoot = true;
     }
+
+    public void SetUsageFromOtherScript(){
+        shouldShoot = true;
+    }
 }

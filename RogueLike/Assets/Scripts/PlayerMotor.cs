@@ -30,6 +30,8 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField] public GameObject gun;
     [SerializeField] public GameObject spear;
     [SerializeField] public int currentHealth;
+    [SerializeField] public Gun gunScript;
+    [SerializeField] public SpearScript spearScript;
     //static int healthToHandle;
     private GameObject currentFloor;
     private int currentGemTarget;
@@ -91,6 +93,7 @@ public class PlayerMotor : MonoBehaviour
         }
 
         if(Input.GetKeyDown(KeyCode.E)){
+            gunScript.SetUsageFromOtherScript();
             isGunActivated = !isGunActivated;
             gun.SetActive(isGunActivated);
             isShieldActivated = false;
@@ -100,6 +103,7 @@ public class PlayerMotor : MonoBehaviour
         }
 
         if(Input.GetKeyDown(KeyCode.C)){
+            spearScript.SetUsageFromOtherScript();
             isGunActivated = false;
             isShieldActivated = false;
             isSpearActivated = !isSpearActivated;
