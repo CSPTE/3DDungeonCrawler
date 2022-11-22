@@ -16,6 +16,8 @@ TagManager:
   - Centaur
   - Dragon
   - Weapon
+  - WallToShootThrough
+  - Porjectile
   layers:
   - Default
   - TransparentFX
@@ -23,7 +25,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Wall
   - 
   - 
   - 

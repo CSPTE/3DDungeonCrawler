@@ -14,6 +14,7 @@ public class Projectile : MonoBehaviour
     void Start()
     {   
         player = GameObject.Find("Player");
+        //gameObject.tag = "Projectile";
         playerMotor = player.GetComponent<PlayerMotor>();
         rb.velocity = transform.forward * launchForce;
 
@@ -31,6 +32,12 @@ public class Projectile : MonoBehaviour
 			playerMotor.SetHealth(damage);
             Destroy(gameObject);
         }
+        if(other.gameObject.tag == "Wall"){
+            Destroy(gameObject);
+            Debug.Log("Object was destroyed");
+        }
+        //Debug.Log(other.gameObject.layer);
+        
 
         
     }

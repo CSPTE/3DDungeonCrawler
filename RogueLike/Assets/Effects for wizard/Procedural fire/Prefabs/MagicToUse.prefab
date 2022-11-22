@@ -19317,7 +19317,7 @@ GameObject:
   - component: {fileID: 2696063792304096118}
   m_Layer: 0
   m_Name: MagicToUse
-  m_TagString: Untagged
+  m_TagString: Porjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -24217,6 +24217,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: -7754175133686675387}
-  launchForce: 25
-  destroyAfterSeconds: 4
+  launchForce: 30
+  destroyAfterSeconds: 3
   damage: 1

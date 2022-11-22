@@ -147,6 +147,7 @@ public class DragonScript : MonoBehaviour
             isFirstAttack = false;
             takeDamageIfInside = false;
             playerMotor.SetHealthCount(playerMotor.GetHealth() - damage);
+            Debug.Log("There was a collision");
 			playerMotor.SetHealth(damage);
         }
     }
@@ -162,10 +163,8 @@ public class DragonScript : MonoBehaviour
         StartCoroutine(StopTheDragon(2));
         for(float i =-1; i < 1;){
             if(shouldSpawnFlame){
-                //shouldSpawnFlame = false;
                 Vector3 positionToSpawn = new Vector3(projectileSpawnpoint.position.x + i, projectileSpawnpoint.position.y, projectileSpawnpoint.position.z);
                 Instantiate(projectilePrefab, positionToSpawn, transform.rotation);
-                //StartCoroutine(WaitForFlame(0.00001f));
                 i = i + 0.05f;
             }
         }

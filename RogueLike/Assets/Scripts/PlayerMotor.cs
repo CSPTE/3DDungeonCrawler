@@ -74,7 +74,8 @@ public class PlayerMotor : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+        
         controller = GetComponent<CharacterController>();
         rigidBody = GetComponent<Rigidbody>();
         stepRayUpper.transform.position = new Vector3(stepRayUpper.transform.position.x, stepHeigth, stepRayUpper.transform.position.z);
@@ -123,7 +124,7 @@ public class PlayerMotor : MonoBehaviour
 
         if(isShieldActivated) tempSpeed=0;
         else tempSpeed = speed;
-
+        
         isGrounded = controller.isGrounded;
         stepClimb();
         if (currentHealth <= 0){
@@ -189,6 +190,7 @@ public class PlayerMotor : MonoBehaviour
         } 
 
         if(other.gameObject.CompareTag("TutorialWall")){
+            Cursor.visible = true;
             if(currentTutorial == 2){
                 loadNextTutorial(tutorial2);
                 tutorialWall2.gameObject.SetActive(false);
@@ -262,40 +264,48 @@ public class PlayerMotor : MonoBehaviour
     public void turnOffTutorial(){
         tutorial = false;
         stopRenderingCanvas(tutorial1);
+        Cursor.visible = false;
     }
 
     public void continueTutorial(){
         stopRenderingCanvas(tutorial1);
         currentTutorial++;
+        Cursor.visible = false;
     }
 
     public void turnOffTutorial2(){
         tutorial = false;
         stopRenderingCanvas(tutorial2);
+        Cursor.visible = false;
     }
 
     public void continueTutorial2(){
         stopRenderingCanvas(tutorial2);
         currentTutorial++;
+        Cursor.visible = false;
     }
 
     public void turnOffTutorial3(){
         tutorial = false;
         stopRenderingCanvas(tutorial3);
+        Cursor.visible = false;
     }
 
     public void continueTutorial3(){
         stopRenderingCanvas(tutorial3);
+        Cursor.visible = false;
         currentTutorial++;
     }
 
     public void turnOffTutorial4(){
         tutorial = false;
         stopRenderingCanvas(tutorial4);
+        Cursor.visible = false;
     }
 
     public void continueTutorial4(){
         stopRenderingCanvas(tutorial4);
+        Cursor.visible = false;
         currentTutorial++;
     }
 

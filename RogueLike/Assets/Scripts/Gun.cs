@@ -10,6 +10,7 @@ public class Gun : MonoBehaviour
     public float howMuchToWaitBetweenShots = 0.2f;
     public Camera fspCam;
     public ParticleSystem muzzleFlash;
+    public PlayerLook playerLook;
     public PlayerMotor playerMotor;
     public GameObject impactEffect;
     public float impactForce = 30f;
@@ -18,6 +19,7 @@ public class Gun : MonoBehaviour
     private GameObject child;
     private float timestamp;
     private bool shouldShoot = true;
+    private bool isPlayerAiming = false;
 
     public AudioSource gunSound;
 
@@ -37,6 +39,13 @@ public class Gun : MonoBehaviour
             timestamp = Time.time + 0.4f;
         }
 
+        if(Input.GetMouseButtonDown(1)) {
+            playerLook.SetAimSensitivity(playerLook.GetXSensitivity() /2, playerLook.GetYSensitivity() /2);
+        }
+        if(Input.GetMouseButtonUp(1)) {
+            playerLook.SetAimSensitivity(playerLook.GetXSensitivity(), playerLook.GetYSensitivity());
+        }
+
         Aim(Input.GetMouseButton(1));
     
 
@@ -45,6 +54,7 @@ public class Gun : MonoBehaviour
 
     void Shoot(){
         if(shouldShoot && playerMotor.GetBulletCount() > 0){
+            
             playerMotor.SetBulletCount();
             shouldShoot = false;
             StartCoroutine(WaitBeforeShoot());

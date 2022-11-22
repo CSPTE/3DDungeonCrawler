@@ -13,12 +13,14 @@ GameObject:
   - component: {fileID: 23142899198243486}
   - component: {fileID: -6311665476226678254}
   - component: {fileID: -5919518725090412927}
-  m_Layer: 0
+  - component: {fileID: 3629804332581007182}
+  - component: {fileID: -8843569205692019751}
+  m_Layer: 6
   m_Name: pylon_2
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
-  m_StaticEditorFlags: 2147483647
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4889344851645928
 Transform:
@@ -115,3 +117,28 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300140, guid: 4e15996ba1e2f4b4392985ef6ac6b27c, type: 3}
+--- !u!65 &3629804332581007182
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566008642154666}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.612647, y: 7.01, z: 2.612648}
+  m_Center: {x: 0.00000047683716, y: 3.505, z: 0}
+--- !u!114 &-8843569205692019751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1566008642154666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73628f054ae30094a8e408e21946012e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
